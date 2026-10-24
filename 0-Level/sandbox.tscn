@@ -1,5 +1,103 @@
 [gd_scene format=3 uid="uid://dp5mpo2aw4i21"]
 
+[ext_resource type="PackedScene" uid="uid://dwtd46dj4u176" path="res://0-Level/Player/starter_controller.tscn" id="1_myolb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p532g"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_myolb"]
+sky_material = SubResource("ProceduralSkyMaterial_p532g")
+
+[sub_resource type="Environment" id="Environment_gav14"]
+background_mode = 2
+sky = SubResource("Sky_myolb")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p532g"]
+albedo_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myolb"]
+albedo_color = Color(0.8981243, 0.06276879, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gav14"]
+albedo_color = Color(5.7756904e-07, 0.38755342, 0.9997675, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tn58n"]
+albedo_color = Color(0.95686585, 0.36658812, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xynfh"]
+albedo_color = Color(0.33875698, 0.6673512, 0, 1)
+
 [node name="Sandbox" type="Node3D" unique_id=871683395]
 
 [node name="0-Level" type="Node3D" parent="." unique_id=368210896]
+
+[node name="Lighting" type="Node3D" parent="0-Level" unique_id=1311137102]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="0-Level/Lighting" unique_id=440627125]
+environment = SubResource("Environment_gav14")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="0-Level/Lighting" unique_id=1629480603]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Layout" type="Node3D" parent="0-Level" unique_id=1933018763]
+
+[node name="TheFloor" type="CSGBox3D" parent="0-Level/Layout" unique_id=1591619517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_p532g")
+
+[node name="1-Input" type="Node3D" parent="." unique_id=1163999801]
+
+[node name="TestArea" type="Node3D" parent="1-Input" unique_id=16239008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.25, 0, -12.75)
+
+[node name="Box" type="CSGBox3D" parent="1-Input/TestArea" unique_id=1412495595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+use_collision = true
+size = Vector3(5, 1, 5)
+material = SubResource("StandardMaterial3D_myolb")
+
+[node name="Box2" type="CSGBox3D" parent="1-Input/TestArea" unique_id=148944619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.75, -3)
+use_collision = true
+size = Vector3(5, 1.5, 5)
+material = SubResource("StandardMaterial3D_gav14")
+
+[node name="Wall" type="CSGBox3D" parent="1-Input/TestArea" unique_id=515877840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, -6)
+use_collision = true
+size = Vector3(5, 4, 0.3)
+material = SubResource("StandardMaterial3D_tn58n")
+
+[node name="DoorSub" type="CSGBox3D" parent="1-Input/TestArea/Wall" unique_id=18808614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+operation = 2
+use_collision = true
+size = Vector3(1.5, 2.5, 0.5)
+material = SubResource("StandardMaterial3D_tn58n")
+
+[node name="Wall2" type="CSGBox3D" parent="1-Input/TestArea" unique_id=718872840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2, -3.5)
+use_collision = true
+size = Vector3(5, 4, 0.3)
+material = SubResource("StandardMaterial3D_tn58n")
+
+[node name="DoorSub" type="CSGBox3D" parent="1-Input/TestArea/Wall2" unique_id=992513755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+operation = 2
+use_collision = true
+size = Vector3(1.5, 1.5, 0.5)
+material = SubResource("StandardMaterial3D_tn58n")
+
+[node name="Platform" type="CSGBox3D" parent="1-Input/TestArea" unique_id=1657921084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.5, -3.5)
+use_collision = true
+size = Vector3(3, 0.2, 3)
+material = SubResource("StandardMaterial3D_xynfh")
+
+[node name="StarterController" parent="." unique_id=577381129 instance=ExtResource("1_myolb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, -5.25)
